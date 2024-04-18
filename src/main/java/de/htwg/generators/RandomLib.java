@@ -1,8 +1,11 @@
 package de.htwg.generators;
 
 import java.security.SecureRandom;
+import java.time.LocalDate;
 
 public class RandomLib {
+
+    private static final int MAX_STAY = 30;
 
     // Define characters that can be used in the password
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_+=";
@@ -33,4 +36,49 @@ public class RandomLib {
 
         return ibanBuilder.toString();
     }
+
+    public static class RandomIntSequence{
+
+        int[] SEQUENCE;
+        int POPPED = 0;
+
+        public boolean contains ( int[] sequence, int value){
+            for (int j : sequence) {
+                if (j == value) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void createSequence ( int min, int max, int length){
+            if ((max - min + 1) < length) {
+                throw new IllegalArgumentException("The range is too small to generate a sequence of the given length.");
+            }
+            SEQUENCE = new int[length];
+            int created = 0;
+            while (created < length) {
+                int next = getInt(min, max);
+                if (!contains(SEQUENCE, next)) {
+                    SEQUENCE[created] = next;
+                    created++;
+                }
+            }
+        }
+
+        public int getNextInt () {
+            POPPED++;
+            return SEQUENCE[POPPED - 1];
+        }
+    }
+
+    public static LocalDate getRandomDate() {
+        LocalDate today = LocalDate.now();
+        return today.plusDays(getInt(1, 700));
+    }
+
+    public static LocalDate getRandomDate(LocalDate startDate) {
+        return startDate.plusDays(getInt(3, MAX_STAY));
+    }
+
 }

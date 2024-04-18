@@ -22,7 +22,7 @@ test {
 
 task run(type: JavaExec) {
     // Specify the main class to execute
-    main = 'de.htwg.main.Populator'
+    main = 'de.htwg.main.DbPopulator'
 
     // Specify the classpath for the task
     classpath = sourceSets.main.runtimeClasspath

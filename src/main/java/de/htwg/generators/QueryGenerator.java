@@ -1,5 +1,8 @@
 package de.htwg.generators;
 
+import java.time.LocalDate;
+import java.sql.Date;
+
 import static de.htwg.generators.Data.*;
 import static de.htwg.generators.RandomLib.*;
 
@@ -8,7 +11,7 @@ public class QueryGenerator {
 
 
     public static String getAddress() {
-        return "'" + STREETS[getInt(0, STREETS.length - 1)] + "', '" + getInt(1, 254) + "', '" + ZIP_CODES[getInt(0, ZIP_CODES.length - 1)] + "', '" + CITIES[getInt(0, CITIES.length - 1)] + "', '" + getInt(1, COUNTRIES.length - 1) + "'";
+        return "'" + STREETS[getInt(0, STREETS.length - 1)] + "', '" + getInt(1, 254) + "', '" + ZIP_CODES[getInt(0, ZIP_CODES.length - 1)] + "', '" + CITIES[getInt(0, CITIES.length - 1)] + "', '" + getInt(1, COUNTRIES.length) + "'";
     }
 
     public static String getCustomer() {
@@ -66,17 +69,19 @@ public class QueryGenerator {
     }
 
     public static String getAttraction() {
-        return "'" + ATTRACTION_NAMES[getInt(0, ATTRACTION_NAMES.length - 1)] + "', '" + getInt(0, ATTRACTION_CATEGORIES.length - 1) + "', '" + ATTRACTION_DESCRIPTIONS[getInt(0, ATTRACTION_DESCRIPTIONS.length - 1)] + "', " + getAddress();
+        return "'" + ATTRACTION_NAMES[getInt(0, ATTRACTION_NAMES.length - 1)] + "', '" + getInt(1, ATTRACTION_CATEGORIES.length) + "', '" + ATTRACTION_DESCRIPTIONS[getInt(0, ATTRACTION_DESCRIPTIONS.length - 1)] + "', " + getAddress();
     }
 
     public static String getBooking() {
-        return "'";
+        Date bookingDate = Date.valueOf(LocalDate.now());
+        Date startDate = Date.valueOf(getRandomDate());
+        Date endDate = Date.valueOf(getRandomDate(startDate.toLocalDate()));
+
+        return "'" + bookingNumberGenerator(bookingDate.toLocalDate()) + "', TO_DATE('" + bookingDate + "', 'YYYY-MM-DD'), TO_DATE('" + startDate + "', 'YYYY-MM-DD'), TO_DATE('" + endDate + "', 'YYYY-MM-DD')";
     }
     
-    public static String bookingNumberGenerator() {
-        StringBuilder bookingNumber = new StringBuilder();
-
-        return bookingNumber.toString();
+    public static String bookingNumberGenerator(LocalDate bookingDate) {
+        return bookingDate.toString().replace("-", "") + "-" + getInt(100000, 999999);
     }
 
 
