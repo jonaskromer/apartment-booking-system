@@ -43,3 +43,5 @@ bin/
 
 ### Login Data ###
 /assets/server_data.txt
+
+.idea/

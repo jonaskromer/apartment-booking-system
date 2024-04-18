@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    // Oracle JDBC Driver
+    implementation group: 'com.oracle.database.jdbc', name: 'ojdbc10', version: '19.22.0.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task run(type: JavaExec) {
+    // Specify the main class to execute
+    main = 'de.htwg.main.Populator'
+
+    // Specify the classpath for the task
+    classpath = sourceSets.main.runtimeClasspath
+}

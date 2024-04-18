@@ -1,0 +1,11 @@
+DELETE FROM distance_mapping;
+DELETE FROM facility;
+DELETE FROM facility_mapping;
+DELETE FROM payment;
+DELETE FROM picture;
+DELETE FROM attraction;
+DELETE FROM attraction_category;
+DELETE FROM booking;
+DELETE FROM customer;
+DELETE FROM apartment;
+DELETE FROM country;

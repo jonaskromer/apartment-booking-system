@@ -1,0 +1,11 @@
+DROP TABLE distance_mapping;
+DROP TABLE facility;
+DROP TABLE facility_mapping;
+DROP TABLE payment;
+DROP TABLE picture;
+DROP TABLE attraction;
+DROP TABLE attraction_category;
+DROP TABLE booking;
+DROP TABLE customer;
+DROP TABLE apartment;
+DROP TABLE country;
