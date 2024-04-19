@@ -9,8 +9,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static de.htwg.generators.PrintLib.printException;
-import static de.htwg.generators.PrintLib.printHashs;
+import static de.htwg.dbpopulation.generators.PrintLib.printException;
+import static de.htwg.dbpopulation.generators.PrintLib.printHashs;
 
 
 public class DbConnector {

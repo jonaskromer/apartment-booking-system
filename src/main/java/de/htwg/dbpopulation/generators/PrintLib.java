@@ -1,4 +1,4 @@
-package de.htwg.generators;
+package de.htwg.dbpopulation.generators;
 
 import java.io.Console;
 import java.sql.SQLException;

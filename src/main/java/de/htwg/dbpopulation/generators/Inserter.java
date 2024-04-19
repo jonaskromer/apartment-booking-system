@@ -1,10 +1,12 @@
-package de.htwg.generators;
+package de.htwg.dbpopulation.generators;
+
+import de.htwg.dbpopulation.Data;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static de.htwg.generators.PrintLib.*;
+import static de.htwg.dbpopulation.generators.PrintLib.*;
 
 public class Inserter {
 

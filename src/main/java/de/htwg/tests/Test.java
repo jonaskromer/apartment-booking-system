@@ -1,6 +1,6 @@
 package de.htwg.tests;
 
-import de.htwg.generators.QueryGenerator;
+import de.htwg.dbpopulation.generators.QueryGenerator;
 
 import java.time.LocalDate;
 

@@ -1,4 +1,4 @@
-package de.htwg.generators;
+package de.htwg.dbpopulation.generators;
 
 import java.security.SecureRandom;
 import java.time.LocalDate;

@@ -1,7 +1,7 @@
 package de.htwg.main;
 
-import de.htwg.generators.Creator;
-import de.htwg.generators.Inserter;
+import de.htwg.dbpopulation.generators.Populator;
+import de.htwg.dbpopulation.generators.Inserter;
 
 import java.sql.*;
 
@@ -15,13 +15,13 @@ public class DbPopulator {
         Inserter.insertCountries(inserts, conn);
         Inserter.insertAttractionCategories(inserts, conn);
         Inserter.insertFacilities(inserts, conn);
-        Creator.createCustomers(0, conn);
-        Creator.createApartments(0, conn);
-        Creator.createAttractions(0, conn);
-        Creator.createDistanceMappings(0, conn);
-        Creator.createFacilityMappings(0, conn);
-        Creator.createBookings(0, conn);
-        Creator.createFullPayment(100, conn);
+        Populator.createCustomers(15000, conn);
+        Populator.createApartments(10000, conn);
+        Populator.createAttractions(5000, conn);
+        Populator.createDistanceMappings(1000, conn);
+        Populator.createFacilityMappings(1000, conn);
+        Populator.createBookings(1000, conn);
+        Populator.createFullPayment(500, conn);
 
     }
 }

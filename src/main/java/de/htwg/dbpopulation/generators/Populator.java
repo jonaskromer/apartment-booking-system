@@ -1,4 +1,4 @@
-package de.htwg.generators;
+package de.htwg.dbpopulation.generators;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -7,12 +7,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static de.htwg.generators.QueryGenerator.*;
-import static de.htwg.generators.PrintLib.*;
-import static de.htwg.generators.RandomLib.getInt;
-import static de.htwg.generators.RandomLib.getRandomDate;
+import static de.htwg.dbpopulation.generators.QueryGenerator.*;
+import static de.htwg.dbpopulation.generators.PrintLib.*;
 
-public class Creator {
+public class Populator {
 
     public static void createCustomers(int quantity, Connection conn) {
         if (quantity == 0) {
@@ -255,12 +253,12 @@ public class Creator {
 
             Statement stmt = conn.createStatement();
             for (int i = 0; i < quantity; i++) {
-                String apartmentId = apartmentIds[getInt(0, apartmentIds.length - 1)];
-                int mappings = getInt(4, 15);
+                String apartmentId = apartmentIds[RandomLib.getInt(0, apartmentIds.length - 1)];
+                int mappings = RandomLib.getInt(4, 15);
                 RandomLib.RandomIntSequence rand = new RandomLib.RandomIntSequence();
                 rand.createSequence(0, attractionIds.length - 1, mappings);
                 for (int j = 0; j < mappings; j++) {
-                    int distance = getInt(0, 50000);
+                    int distance = RandomLib.getInt(0, 50000);
                     myUpdateQuery = "INSERT INTO DISTANCE_MAPPING(APARTMENT_ID, ATTRACTION_ID, DISTANCE) " +
                             "VALUES('" + apartmentId + "', '" + attractionIds[rand.getNextInt()] + "', '" + distance + "')";
                     stmt.executeUpdate(myUpdateQuery);
@@ -298,12 +296,12 @@ public class Creator {
 
             Statement stmt = conn.createStatement();
             for (int i = 0; i < quantity; i++) {
-                String apartmentId = apartmentIdsArr[getInt(0, apartmentIdsArr.length - 1)];
-                int mappings = getInt(4, 15);
+                String apartmentId = apartmentIdsArr[RandomLib.getInt(0, apartmentIdsArr.length - 1)];
+                int mappings = RandomLib.getInt(4, 15);
                 RandomLib.RandomIntSequence rand = new RandomLib.RandomIntSequence();
                 rand.createSequence(0, attractionIdsArr.length - 1, mappings);
                 for (int j = 0; j < mappings; j++) {
-                    int distance = getInt(0, 50000);
+                    int distance = RandomLib.getInt(0, 50000);
                     myUpdateQuery = "INSERT INTO DISTANCE_MAPPING(APARTMENT_ID, ATTRACTION_ID, DISTANCE) " +
                             "VALUES('" + apartmentId + "', '" + attractionIdsArr[rand.getNextInt()] + "', '" + distance + "')";
                     stmt.executeUpdate(myUpdateQuery);
@@ -359,8 +357,8 @@ public class Creator {
 
             Statement stmt = conn.createStatement();
             for (int i = 0; i < quantity; i++) {
-                String apartmentId = apartmentIds[getInt(0, apartmentIds.length - 1)];
-                int mappings = getInt(4, 15);
+                String apartmentId = apartmentIds[RandomLib.getInt(0, apartmentIds.length - 1)];
+                int mappings = RandomLib.getInt(4, 15);
                 RandomLib.RandomIntSequence rand = new RandomLib.RandomIntSequence();
                 rand.createSequence(0, facilityIds.length - 1, mappings);
                 for (int j = 0; j < mappings; j++) {
@@ -401,8 +399,8 @@ public class Creator {
 
             Statement stmt = conn.createStatement();
             for (int i = 0; i < quantity; i++) {
-                String apartmentId = apartmentIdsArr[getInt(0, apartmentIdsArr.length - 1)];
-                int mappings = getInt(4, 15);
+                String apartmentId = apartmentIdsArr[RandomLib.getInt(0, apartmentIdsArr.length - 1)];
+                int mappings = RandomLib.getInt(4, 15);
                 RandomLib.RandomIntSequence rand = new RandomLib.RandomIntSequence();
                 rand.createSequence(0, facilityIdsArr.length - 1, mappings);
                 for (int j = 0; j < mappings; j++) {
@@ -466,7 +464,7 @@ public class Creator {
             for (int i = 0; i < quantity; i++) {
                 String booking = getBooking();
                 myUpdateQuery = "INSERT INTO BOOKING(BOOKING_NUMBER, BOOKING_DATE, BOOKING_START, BOOKING_END, APARTMENT_ID, CUSTOMER_ID) " +
-                        "VALUES(" + booking + ", '" + apartmentIds[getInt(0, apartmentIds.length - 1)] + "', '" + customerIds[getInt(0, customerIds.length - 1)] + "')";
+                        "VALUES(" + booking + ", '" + apartmentIds[RandomLib.getInt(0, apartmentIds.length - 1)] + "', '" + customerIds[RandomLib.getInt(0, customerIds.length - 1)] + "')";
                 stmt.executeUpdate(myUpdateQuery);
                 createdBookings++;
             }
@@ -503,7 +501,7 @@ public class Creator {
             for (int i = 0; i < quantity; i++) {
                 String booking = getBooking();
                 myUpdateQuery = "INSERT INTO BOOKING(BOOKING_NUMBER, BOOKING_DATE, BOOKING_START, BOOKING_END, APARTMENT_ID, CUSTOMER_ID) " +
-                        "VALUES(" + booking + ", '" + apartmentIdsArr[getInt(0, apartmentIdsArr.length - 1)] + "', '" + customerIdsArr[getInt(0, customerIdsArr.length - 1)] + "')";
+                        "VALUES(" + booking + ", '" + apartmentIdsArr[RandomLib.getInt(0, apartmentIdsArr.length - 1)] + "', '" + customerIdsArr[RandomLib.getInt(0, customerIdsArr.length - 1)] + "')";
                 stmt.executeUpdate(myUpdateQuery);
                 createdBookings++;
             }
@@ -551,7 +549,7 @@ public class Creator {
             Statement stmt = conn.createStatement();
             for (int i = 0; i < quantity; i++) {
                 myUpdateQuery = "INSERT INTO PAYMENT(BOOKING_ID, PAYMENT_AMOUNT, PAYMENT_DATE) " +
-                        "VALUES('" + bookingIds[getInt(0, bookingIds.length - 1)] + "', '" + getInt(100, 30000) + "', TO_DATE('" + getRandomDate() + "', 'YYYY-MM-DD'))";
+                        "VALUES('" + bookingIds[RandomLib.getInt(0, bookingIds.length - 1)] + "', '" + RandomLib.getInt(100, 30000) + "', TO_DATE('" + RandomLib.getRandomDate() + "', 'YYYY-MM-DD'))";
                 stmt.executeUpdate(myUpdateQuery);
                 createdFullPayments++;
             }
@@ -587,7 +585,7 @@ public class Creator {
             Statement stmt = conn.createStatement();
             for (int i = 0; i < quantity; i++) {
                 myUpdateQuery = "INSERT INTO FULL_PAYMENT(BOOKING_ID, PAYMENT_AMOUNT, PAYMENT_DATE) " +
-                        "VALUES('" + bookingIdsArr[getInt(0, bookingIdsArr.length - 1)] + "', '" + getInt(100, 30000) + "', TO_DATE('" + getRandomDate() + "', 'YYYY-MM-DD'))";
+                        "VALUES('" + bookingIdsArr[RandomLib.getInt(0, bookingIdsArr.length - 1)] + "', '" + RandomLib.getInt(100, 30000) + "', TO_DATE('" + RandomLib.getRandomDate() + "', 'YYYY-MM-DD'))";
                 stmt.executeUpdate(myUpdateQuery);
                 createdFullPayments++;
             }
